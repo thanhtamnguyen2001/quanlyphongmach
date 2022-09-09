@@ -1,0 +1,115 @@
+{% extends 'layout/base.html' %}
+{% block title %} Thanh toan {% endblock %}
+
+{% block container %}
+
+{% if res_receipt == '' %}
+<br><br><br><br><br>
+<div style="overflow: auto">
+    <div class="container" style="width: 30%; float: left;">
+        <h1 style="text-align: center">HÓA ĐƠN</h1>
+        <div class="table-scroll" style="border-bottom: 1px solid #000">
+            <table >
+                <tr class="thead" style="text-align: center;">
+                    <th>Mã hóa đơn</th>
+                    <th>Ngày tạo</th>
+                    <th>Y tá lập hóa đơn</th>
+                    <th>Bệnh nhân</th>
+                    <th>Mã toa thuốc</th>
+                </tr>
+                    {% for p in receipts %}
+                <tr class="tbody">
+                    <td style="text-align: center;">{{ p.id }}</td>
+                    <td style="text-align: center;">{{ p.created_id }}</td>
+                    <td>{{ p.user_id }}</td>
+                    <td>{{ p.patient_id }}</td>
+                    <td>{{ p.prescription_id }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="container" style="width: 35%; float: left; margin-right: 60px">
+        <h1 style="text-align: center">CHI TIẾT HÓA ĐƠN</h1>
+        <div class="table-scroll" style="border-bottom: 1px solid #000">
+            <table >
+                <tr class="thead" style="text-align: center;">
+                    <th>Mã hóa đơn</th>
+                    <th>Mã thuốc</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                </tr>
+                    {% for p in receipt_details %}
+                <tr class="tbody">
+                    <td style="text-align: center;">{{ p.receipt_id }}</td>
+                    <td style="text-align: center;">{{ p.medicine_id }}</td>
+                    <td>{{ p.quantity }}</td>
+                    <td>{{ p.price }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    <form method="post" style="width:100%">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inpId">Mã hóa đơn</label>
+          <input type="text" class="form-control" id="inpId" maxlength="10" name="id">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Thanh toán</button>
+    </form>
+</div>
+{% endif %}
+
+
+{% if res_receipt %}
+<h1 class="text-center"> Thông tin bệnh nhân</h1>
+<form method="post" action="/test_ne">
+<div class="form-row">
+    <div class="col-md-4 col-sm-4">
+      <label for="inpId">Mã bệnh nhân</label>
+      <input type="number" class="form-control" id="idReceipt" readonly="true" name="pid" required value="{{patient[0].id}}">
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label for="inpId">Mã hóa đơn</label>
+      <input type="number" class="form-control" id="inpIdP" readonly="true" name="pid" required value="{{receipt[0].id}}">
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label for="inpName">Họ và tên</label>
+      <input type="text" class="form-control" id="inpName" readonly="true" name="name" required value="{{patient[0].name}}">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-md-4 col-sm-4 ">
+      <label for="inpDOB">Ngày khám</label>
+      <input type="date" class="form-control" id="inpDR" name="date_registration" readonly="true" value="{{ patient[0].date_of_registration.strftime('%Y-%m-%d') }}" >
+    </div>
+    <div class="col-md-4 col-sm-4 ">
+      <label for="inpDOB">Ngày sinh</label>
+      <input type="date" class="form-control" id="inpDOB" readonly="true" name="DOB" value="{{ patient[0].dateofbirth.strftime('%Y-%m-%d') }}" >
+    </div>
+    <div class="col-md-4 col-sm-4 ">
+      <label for="inpDOB">Giới tính</label>
+      <input type="text" class="form-control" id="inpSex" readonly="true" name="sex" value="{{ patient[0].sex}}" >
+    </div>
+
+</div>
+    <div class="form-row">
+    <div class="col-md-4 col-sm-4">
+      <label for="inpId">Tiền khám</label>
+      <input type="number" class="form-control" id="TK" readonly="true" name="pid" required value="{{regulation[0].patient_price}}">
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label for="inpName">Tiền thuốc</label>
+      <input type="text" class="form-control" id="TT" readonly="true" name="name" required value="{{receipt_detail[0].quantity * receipt_detail[0].price}}">
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label for="inpName">Tổng cộng</label>
+      <input type="text" class="form-control" id="tong" readonly="true" name="name" required value="{{regulation[0].patient_price + receipt_detail[0].quantity * receipt_detail[0].price}}">
+    </div>
+</div>
+{% endif %}
+{% endblock %}

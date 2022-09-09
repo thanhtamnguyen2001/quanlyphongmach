@@ -1,0 +1,78 @@
+<div class="row header">
+      <div class="col-md-3 col-xs-12 ">
+          <img class="pointer" src="{{ url_for('static', filename='images/yte.jpg') }}" alt="logo" />
+          <a class="tieude" style="text-decoration:none;" href="{{ url_for('home') }}">Phòng Mạch</a>
+      </div>
+    <div class="col-md-4 col-xs-12">
+    </div>
+      <div class="col-md-5 col-xs-12 header_red">
+          <h3><i class="fa fa-phone"></i>hotline: 0972351922</h3>
+          <p>Từ 8h00 - 20h00 tất cả các ngày trong tuần </p>
+      </div>
+</div>
+<nav class="main-header navbar navbar-expand navbar-light menu text_menu">
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url_for('home') }}" class="nav-link" >Trang chủ</a>
+      </li>
+        {% if not current_user.is_authenticated %}
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url_for('dang_ky') }}" methods="post" class="nav-link">Đăng ký khám bệnh</a>
+      </li>
+        {% endif%}
+      {% if current_user.is_authenticated and (current_user.user_role.value == 2) %}
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('phieu_kham') }}" class="nav-link">Lập phiếu khám</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('account_change') }}" class="nav-link">Đổi Mật khẩu</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-success" href="{{ url_for('home') }}">
+              {% if current_user.avatar  %}
+                <img src="{{ current_user.avatar }}" class="rounded-circle" width="30" alt="{{ current_user.name }}"/>
+              {% else %}
+                 <img src="{{ url_for('static', filename='images/yte.jpg') }}" class="rounded-circle" width="20px" alt="{{ current_user.name }}"/>
+              {% endif %}
+              {{ current_user.username }}
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-info -none d-sm-inline-block" href="{{ url_for('user_signout') }}">Đăng xuất</a>
+        </li>
+      {% elif current_user.is_authenticated and (current_user.user_role.value == 3) %}
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('y_ta_dang_ky') }}" class="nav-link">Đăng ký cho bệnh nhân</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('medical_examination_list') }}" class="nav-link">Lập danh sách khám</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('lap_hoa_don') }}" class="nav-link">Lập hóa đơn</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('y_ta_thanh_toan') }}" class="nav-link">Thanh toán</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('account_change') }}" class="nav-link">Đổi Mật khẩu</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-success" href="{{ url_for('home') }}">
+              {% if current_user.avatar  %}
+                <img src="{{ current_user.avatar }}" class="rounded-circle" width="30" alt="{{ current_user.name }}"/>
+              {% else %}
+                 <img src="{{ url_for('static', filename='images/yte.jpg') }}" class="rounded-circle" width="20px" alt="{{ current_user.name }}"/>
+              {% endif %}
+              {{ current_user.username }}
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-info -none d-sm-inline-block" href="{{ url_for('user_signout') }}">Đăng xuất</a>
+        </li>
+      {% else %}
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url_for('user_signin') }}" class="nav-link">Đăng nhập</a>
+        </li>
+      {% endif %}
+    </ul>
+</nav>

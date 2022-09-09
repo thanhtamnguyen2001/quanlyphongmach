@@ -1,0 +1,127 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Dang ky kham benh {% endblock %}
+
+{% block container %}
+<br>
+{% if err_msg %}
+<div class="alert alert-danger">
+    <h4>{{ err_msg }}</h4>
+</div>
+{% endif %}
+{% if res_patient == '' %}
+    <form method="post">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inpId">Mã bệnh nhân</label>
+          <input type="text" class="form-control" id="inpId" name="id" maxlength="10" pattern="[0-9]{1,10}">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Lập phiếu khám</button>
+    </form>
+    {% endif %}
+{% if res_patient %}
+    <h1 class="text-center"> Thông tin bệnh nhân</h1>
+<form method="post" action="/hoantatkham">
+<div class="form-row">
+<div class="col-md-4 col-sm-4">
+  <label for="inpId">Mã bệnh nhân</label>
+  <input type="number" class="form-control" id="inpIdP" readonly="true" name="pid" required value="{{patient[0].id}}">
+</div>
+<div class="col-md-4 col-sm-4">
+  <label for="inpName">Họ và tên</label>
+  <input type="text" class="form-control" id="inpName" readonly="true" name="name" required value="{{patient[0].name}}">
+</div>
+</div>
+<div class="form-row">
+<div class="col-md-4 col-sm-4 ">
+  <label for="inpDOB">Ngày khám</label>
+  <input type="date" class="form-control" id="inpDR" name="date_registration" value="{{ patient[0].date_of_registration.strftime('%Y-%m-%d') }}" >
+</div>
+<div class="col-md-4 col-sm-4 ">
+  <label for="inpDOB">Ngày sinh</label>
+  <input type="date" class="form-control" id="inpDOB" readonly="true" name="DOB" value="{{ patient[0].dateofbirth.strftime('%Y-%m-%d') }}" >
+</div>
+<div class="col-md-4 col-sm-4 ">
+  <label for="inpDOB">Giới tính</label>
+  <input type="text" class="form-control" id="inpSex" readonly="true" name="sex" value="{{ patient[0].sex}}" >
+</div>
+</div>
+<div class="form-row">
+    <div class="col-md-4 col-sm-4  col-xs-12 ">
+      <label for="inpSymptoms">Triệu chứng</label>
+      <input type="text" class="form-control" id="inpSymptoms" name="symptoms" required>
+    </div>
+    <div class="col-md-4 col-sm-4  col-xs-12 ">
+      <label for="inpDP">Chuẩn đoán bệnh</label>
+      <input type="text" class="form-control" id="inpDP" name="disease_prediction" required>
+    </div>
+</div>
+<div class="testpre">
+    <div class="prescription">
+        <h5 class="text-center">Kê toa</h5>
+          <div class="form-group">
+            <label for="sel_med">Tên thuốc</label>
+            <select class="form-control " id="sel_med">
+                {% for m in medicines %}
+                    <option value="{{m.id}}">{{ m.name }}</option>
+                {% endfor %}
+            </select>
+          </div>
+            <div class="form-group">
+            <label for="sel_med">Đơn vị</label>
+            <select class="form-control " id="sel_unit">
+                <option value="Chai">Chai</option>
+                <option value="Vien">Viên</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inpDOB">Số lượng</label>
+            <input type="number" class="form-control" id="inpQuantity" name="quan">
+          </div>
+          <div class="form-group">
+            <label for="inpUsing">Cách dùng</label>
+            <input type="text" class="form-control" id="inpUsing" name="quan">
+          </div>
+            <a href="#" class="btn btn-secondary" onclick="add_p()">Thêm vào toa thuốc</a>
+    </div>
+    <div class="prescription_detail">
+        <h5 class="text-center">Toa thuốc</h5>
+        <table class="table" id="table_detail">
+            <tr class="table-success">
+                <th>Thuốc</th>
+                <th>Đơn vị</th>
+                <th>Số lượng</th>
+                <th>Cách dùng</th>
+                <th></th>
+            </tr>
+            {% if session['prescription_session'] %}
+            {% for p in session['prescription_session'].values() %}
+                <tr class="table-info" id="prescription{{ p['id'] }}">
+                    <td>{{p['name']}}</td>
+                    <td>{{p['unit']}}</td>
+                    <td>
+                        <div class="form-group">
+                          <input class="form-control"
+                                 type="number" min="1"
+                                 onblur="update_p({{p['id']}}, this)"
+                                 value="{{p['quantity']}}"/>
+                        </div>
+                    </td>
+                    <td>{{ p['using'] }}</td>
+                    <td>
+                        <input type="button"
+                               value="xóa"
+                               onclick="delete_prescription({{p['id']}})"
+                               class="btn btn-danger"/>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+</div>
+    <input type="submit" class="btn btn-primary" value="Lập phiếu khám"/>
+</form>
+{% endif %}
+{% endblock %}

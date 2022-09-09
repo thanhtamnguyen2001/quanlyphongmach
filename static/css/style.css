@@ -1,0 +1,248 @@
+* {
+    font-family: Tahoma;
+}
+html{
+    overflow: overlay;
+    overflow-x:hidden;
+}
+body
+{
+    margin: 0;
+    box-sizing: border-box;
+}
+}
+h1.subject {
+    text-align: center;
+}
+
+.header{
+    padding: 13px 0;
+    display: flex;
+    align-items: center;
+    text-align:center;
+}
+.header_red{
+    color: red;
+    align-items: right;
+}
+.pointer{
+    cursor: pointer;
+    max-width: 230px;
+    max-height: 95px;
+    width: auto;
+    height: auto;
+    text-decoration:none;
+}
+.tieude{
+    text-decoration:none;
+    color:steelblue;
+    font-size:30px;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.menu{
+    background-color: #056eb0;
+}
+.bg {
+    width:100%;
+}
+.text_menu{
+    padding: 20px;
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.foot ul{
+    justify-content: space-around;
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    padding-bottom:50px;
+}
+.fot{
+    color:white;
+    font-size:25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.tieude:hover {
+    color:green;
+}
+a:hover{
+    text-decoration:none;
+    color:yellow;
+}
+.follow{
+    font-size:30px;
+    font-weight: bold;
+}
+.follow a{
+    color:white;
+}
+.flex{
+    display:flex;
+    justify-content: space-around;
+}
+.ff ul{
+    text-decoration:none;
+    list-style:none;
+    color:white;
+    font-size:16px;
+    font-weight: bold;
+}
+.ff h3{
+    font-weight: bold;
+    text-align:center;
+    color:white;
+    font-size:25px;
+}
+.titl{
+    color:white;
+     font-size:25px;
+     font-weight: bold;
+}
+/*Lap phieu kham */
+div.testpre{
+    margin: 30px 10px;
+    display: flex;
+    align-items: stretch;
+    text-align:center;
+}
+.header_red{
+    color: red;
+    align-items: right;
+}
+.pointer{
+    cursor: pointer;
+    max-width: 230px;
+    max-height: 95px;
+    width: auto;
+    height: auto;
+    text-decoration:none;
+}
+.tieude{
+    text-decoration:none;
+    color:steelblue;
+    font-size:25px;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.menu{
+    background-color: #056eb0;
+}
+.bg {
+    width:100%;
+}
+.text_menu{
+    padding: 20px;
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.foot ul{
+    justify-content: space-around;
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    padding-bottom:50px;
+}
+.fot{
+    color:white;
+    font-size:25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.tieude:hover {
+    color:green;
+}
+a:hover{
+    text-decoration:none;
+    color:yellow;
+}
+.follow{
+    font-size:30px;
+    font-weight: bold;
+}
+.follow a{
+    color:white;
+}
+.flex{
+    display:flex;
+    justify-content: space-around;
+}
+.ff ul{
+    text-decoration:none;
+    list-style:none;
+    color:white;
+    font-size:16px;
+    font-weight: bold;
+}
+.ff h3{
+    font-weight: bold;
+    text-align:center;
+    color:white;
+    font-size:25px;
+}
+.titl{
+    color:white;
+     font-size:25px;
+     font-weight: bold;
+}
+.prescription{
+    width: 35%;
+    margin-right: 10px;
+}
+.prescription_detail{
+    width: 55%;
+    display: block;
+    margin-right: 10px;
+    right: 0px;
+}
+/*form*/
+form {
+    margin: 30px;
+}
+
+/*table*/
+table, th, td{
+    border:0px solid #868585;
+}
+table{
+    border-collapse:collapse;
+    width: 100%;
+    margin: 40px 0px;
+}
+
+
+table tr:nth-child(odd){
+    background-color:#eee;
+}
+table tr:nth-child(even){
+    background-color:white;
+}
+table tr:nth-child(1){
+    background-color: skyblue;
+}
+.table-scroll {
+  height:300px;
+  overflow:auto;
+  margin-top:20px;
+}
+div.container {
+  overflow: auto;
+}
+
+.container h1 {
+    height: 80px;
+}
+.thead th {
+  position: sticky;
+  top: 0;
+  background-color: skyblue;
+}

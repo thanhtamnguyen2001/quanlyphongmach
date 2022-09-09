@@ -1,0 +1,104 @@
+{% extends 'layout/base.html' %}
+{% block title %} Lập hóa đơn {% endblock %}
+
+{% block bodyy%}
+<br><br><br>
+<div style="overflow: auto">
+    {% if msg_res %}
+        <h5 class="alert alert-success">{{ msg_res }}</h5>
+    {% endif %}
+    <div class="container" style="width: 30%; float: left">
+        <h1 style="text-align: center">PHIẾU KHÁM BỆNH</h1>
+        <div class="table-scroll" style="border-bottom: 1px solid #000">
+            <table >
+                <tr class="thead" style="text-align: center;">
+                    <th>Mã phiếu khám</th>
+                    <th>Ngày khám</th>
+                    <th>Triệu chứng</th>
+                    <th>Chuẩn đoán bệnh</th>
+                    <th>Mã bệnh nhân</th>
+                </tr>
+                {% for p in health %}
+                <tr>
+                    <td style="text-align: center;">{{ p.id }}</td>
+                    <td>{{ p.created_date }}</td>
+                    <td>{{ p.symptoms }}</td>
+                    <td>{{ p.disease_prediction }}</td>
+                    <td>{{ p.patient_id }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="container" style="width: 30%; float: left">
+        <h1 style="text-align: center">TOA THUỐC</h1>
+        <div class="table-scroll" style="border-bottom: 1px solid #000">
+            <table >
+                <tr class="thead" style="text-align: center;">
+                    <th>Mã toa thuốc</th>
+                    <th>Ngày tạo</th>
+                    <th>Bác sĩ lập toa</th>
+                    <th>Mã phiếu khám</th>
+                </tr>
+                {% for p in prescription %}
+                <tr>
+                    <td style="text-align: center;">{{ p.id }}</td>
+                    <td>{{ p.created_date }}</td>
+                    <td>{{ p.user_id }}</td>
+                    <td>{{ p.healthCertification_id }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="container" style="width: 30%; float: left">
+        <h1 style="text-align: center">CHI TIẾT TOA THUỐC</h1>
+        <div class="table-scroll" style="border-bottom: 1px solid #000">
+            <table >
+                <tr class="thead" style="text-align: center;">
+                    <th>Mã toa thuốc</th>
+                    <th>Mã thuốc</th>
+                    <th>Số lượng</th>
+                    <th>Cách sử dụng</th>
+                </tr>
+                    {% for p in prescription_detail %}
+                <tr>
+                    <td style="text-align: center;">{{ p.id }}</td>
+                    <td>{{ p.medicine_id }}</td>
+                    <td>{{ p.quantity }}</td>
+                    <td>{{ p.using }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div style="overflow: auto">
+    <form method="post" style="width:40%; float: left">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inpId">Mã y tá</label>
+          <input placeholder="Nhập mã làm việc của ban..." type="text" class="form-control" id="inpId" maxlength="10" name="id_nurse">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inpId">Mã toa thuốc</label>
+          <input placeholder="Chọn mã toa thuốc..." type="text" class="form-control"  maxlength="10" name="id">
+        </div>
+          <div class="form-group col-md-6">
+              <label for="inpId">Mã bệnh nhân</label>
+              <input placeholder="Nhập mã bệnh nhân..." type="text" class="form-control"  maxlength="10" name="id_patient">
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
+    </form>
+
+
+</div>
+
+<br><br><br>
+{% endblock %}

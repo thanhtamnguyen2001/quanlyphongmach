@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Trang Chủ {% endblock %}
+{% block bodyy %}
+    <img class="bg" src="{{ url_for('static', filename='images/nen.jpg') }}" alt="">
+{% endblock %}
+{% block container %}
+    {% if res_msg %}
+        <div class="alert alert-success">
+            <h4>{{ res_msg }}</h4>
+        </div>
+    {% endif %}
+{% endblock %}

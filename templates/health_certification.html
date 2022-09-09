@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} giấy khám bệnh {% endblock %}
+{% block container %}
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <td colspan="5" class="text-center" >PHIẾU KHÁM BỆNH</td>
+        </tr>
+        <tr>
+            <td colspan="2">Họ tên: {{ patient[0].name }}</td>
+            <td colspan="3">Ngày khám: {{ hc.created_date.strftime('%Y-%m-%d')}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">Triệu chứng {{ hc.symptoms }}</td>
+            <td colspan="3">Chuẩn đoán: {{ hc.disease_prediction }}</td>
+        </tr>
+        <tr>
+            <th>STT</th>
+            <th>Thuốc</th>
+            <th>Đơn vị</th>
+            <th>Số lượng</th>
+            <th>Cách dùng</th>
+        </tr>
+        {% for p in prescription_detail.values() %}
+       <tr>
+            <td>{{ p['stt'] }}</td>
+            <td>{{ p['id'] }}</td>
+            <td>{{ p['unit'] }}</td>
+            <td>{{ p['quantity'] }}</td>
+            <td>{{ p['using'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
